@@ -81,6 +81,14 @@ var hurriyet = function(api_key){
 
         var q = generate_odata(resource,id);
 
+        if(o.skip!=undefined || o.skip!=null){
+            q.skip(o.skip);
+        }
+
+        if(o.top!=undefined || o.top!=null){
+            q.top(o.top);
+        }
+        
         for(i in o.columns){
             q.select(o.columns[i]);
         }
@@ -118,8 +126,42 @@ var hurriyet = function(api_key){
 
     self.search = function(keyword,o,c){
 
-        var cols = ['Id','ContentType','ModifiedDate','Title','Description','Text','Files','Path','RelatedNews','Tags','Url','Writers'];
-        get_single("search",keyword,cols,o,c);
+        var defaults = {
+                skip: 0,
+                top: 50,
+                columns : ['Id','ContentType','ModifiedDate','Title','Description','Text','Files','Path','RelatedNews','Tags','Url','Writers']
+            };
+
+        if(o!=undefined && c!=undefined){
+
+            if(o.skip!=undefined || o.skip!=null){
+                    q.skip(o.skip);
+            }
+
+            if(o.top!=undefined || o.top!=null){
+                q.top(o.top);
+            }
+            if(o.columns==null || o.columns==undefined){
+                o.columns = defaults.columns;
+            }
+        }
+
+        if(c==undefined){
+            c = o;
+            o = defaults;
+        }
+
+        var q = generate_odata("search",keyword);
+
+        for(i in o.columns){
+            q.select(o.columns[i]);
+        }
+
+        q.skip(o.skip).top(o.top).get().then(function(res){
+            
+            post_porcess(o,c,res);
+
+        });
     }
 
     return self;
