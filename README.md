@@ -13,36 +13,44 @@
         var api = hurriyet("API-KEY-HERE");
 
 3. For Articles
-    api.articles(function(res){
 
-        console.log(res);
+        api.articles(function(res){
 
-    });
+            console.log(res);
+
+        });
+
 4. For Single Article
-    api.article('40322757',function(res){
 
-        console.log(res);
+        api.article('40322757',function(res){
 
-    });
+            console.log(res);
+
+        });
 
 5. For Columns
-    api.columns(function(res){
 
-        console.log(res);
+        api.columns(function(res){
 
-    });
+            console.log(res);
+
+        });
+
 6. For Single Column
-    api.column('40321556',function(res){
 
-        console.log(res);
+        api.column('40321556',function(res){
 
-    });
+            console.log(res);
+
+        });
+
 7. For Search
-    api.search('hackathon',function(res){
 
-        console.log(res);
+        api.search('hackathon',function(res){
 
-    });
+            console.log(res);
+
+        });
 
 ## Articles Defaults Fields
 	 1. Id
@@ -84,12 +92,12 @@
      11. Url
      12. Writers
 
-**NOTE : ** If you want select different field,skip or top parameters, send options parameters to single methods:
+**NOTE :** If you want select different field,skip or top parameters, send options parameters to single methods:
 
-    api.article('40322757',{skip:20,top:40,columns['Id','Title']},function(res){
+        api.article('40322757',{skip:20,top:40,columns['Id','Title']},function(res){
 
-        console.log(res);
+            console.log(res);
 
-    });
+        });
 
 Developed by aguleroglu
