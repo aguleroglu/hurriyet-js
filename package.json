@@ -18,5 +18,8 @@
     "nodeJS"
   ],
   "author": "aguleroglu",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "odata-client": "^0.5.5"
+  }
 }
