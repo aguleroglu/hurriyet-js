@@ -1,6 +1,6 @@
 {
   "name": "hurriyet-js",
-  "version": "1.0.2",
+  "version": "1.0.4",
   "description": "Hurriyet Public API NodeJs Wrapper",
   "main": "index.js",
   "scripts": {
@@ -20,6 +20,7 @@
   "author": "aguleroglu",
   "license": "ISC",
   "dependencies": {
-    "odata-client": "^0.5.5"
+    "odata-client": "^0.5.5",
+    "striptags":"2.1.1"
   }
 }
