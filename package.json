@@ -1,5 +1,5 @@
 {
-  "name": "hurriyet-nodejs",
+  "name": "hurriyet-js",
   "version": "1.0.0",
   "description": "Hurriyet Public API NodeJs Wrapper",
   "main": "index.js",
@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "hurriyet-nodejs"
+    "url": "hurriyet-js"
   },
   "keywords": [
     "hurriyet",

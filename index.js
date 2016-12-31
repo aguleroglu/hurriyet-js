@@ -1,33 +1,128 @@
+const odata = require('odata-client');
+var striptags = require('striptags');
 
-var hurriyet = require("./hurriyet.js")
+var hurriyet = function(api_key){
 
+    var self = {}
 
-var api = hurriyet("327c396d84c9491982f32e7c3625f908");
+    self.url = 'https://api.hurriyet.com.tr/v1';
 
-// api.articles(function(res){
+    self.api_key = api_key;
 
-//     console.log(res.length);
+    function post_porcess(options,callback,response){
 
-// });
+        var obj = JSON.parse(response.body);
 
-// api.article('40322757',function(res){
+        if(obj.Text!=undefined || obj.Text!=null){
+            obj.StripedText = striptags(obj.Text);
+        }
 
-//     console.log(res);
+        callback(obj);
+    }
+    function generate_odata(resource,id){
+        var res = resource;
 
-// });
+        if(id!=undefined || id!=null){
+            res = res+"/"+id;
+        }
 
-// api.columns(function(res){
+        return odata({service: self.url, resources:res ,headers:{apikey:self.api_key}});;
+    }
 
-//     console.log(res);
+    function get_list(resource,o,c){
 
-// });
+        var defaults = {
+            skip: 0,
+            top: 50,
+        };
 
-// api.column("40321556",function(res){
+        if(o!=undefined && c!=undefined){
+            if(o.skip==null || o.skip==undefined){
+                o.skip = defaults.skip;
+            }
 
-//     console.log(res);
+            if(o.top==null || o.top==undefined){
+                o.top = defaults.top;
+            }
+        }
 
-// })
+        if(c==undefined){
+            c = o;
+            o = defaults
+        }
 
-api.search('hackathon',{top:1},function(res){
-    console.log(res);
-})
+        var q = generate_odata(resource);
+        
+        q.skip(o.skip).top(o.top).get().then(function(res){
+
+            post_porcess(o,c,res);
+            
+        });
+
+    }
+
+    function get_single(resource,id,columns,o,c){
+
+    var defaults = {
+                columns : columns
+            };
+
+        if(o!=undefined && c!=undefined){
+
+            if(o.columns==null || o.columns==undefined){
+                o.columns = defaults.columns;
+            }
+        }
+
+        if(c==undefined){
+            c = o;
+            o = defaults
+        }
+
+        var q = generate_odata(resource,id);
+
+        for(i in o.columns){
+            q.select(o.columns[i]);
+        }
+
+        q.get().then(function(res){
+            
+            post_porcess(o,c,res);
+
+        });
+    }
+
+    self.articles = function(o,c){
+        
+         get_list("articles",o,c);
+
+    }
+
+    self.article = function(id,o,c){
+
+        var cols = ['Id','ContentType','CreatedDate','Title','Description','Text','Editor','Files','Path','RelatedNews','Tags','Url','Writers'];
+        get_single("articles",id,cols,o,c);
+        
+    }
+
+    self.columns = function(o,c){
+
+         get_list("columns",o,c);
+    }
+
+    self.column = function(id,o,c){
+
+        var cols = ['Id','Fullname','ContentType','Title','Description','Text','Files','Path','Url'];
+        get_single("columns",id,cols,o,c);
+    }
+
+    self.search = function(keyword,o,c){
+
+        var cols = ['Id','ContentType','ModifiedDate','Title','Description','Text','Files','Path','RelatedNews','Tags','Url','Writers'];
+        get_single("search",keyword,cols,o,c);
+    }
+
+    return self;
+}
+
+module.exports = hurriyet;
