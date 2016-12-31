@@ -8,8 +8,11 @@
   },
   "repository": {
     "type": "git",
-    "url": "hurriyet-js"
+    "url": "git+https://github.com/aguleroglu/hurriyet-js"
   },
+  "bugs": {
+    "url": "https://github.com/aguleroglu/hurriyet-js/issues"
+},
   "keywords": [
     "hurriyet",
     "nodeJS"
