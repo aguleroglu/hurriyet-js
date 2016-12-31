@@ -1,0 +1,19 @@
+{
+  "name": "hurriyet-nodejs",
+  "version": "1.0.0",
+  "description": "Hurriyet Public API NodeJs Wrapper",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "hurriyet-nodejs"
+  },
+  "keywords": [
+    "hurriyet",
+    "nodeJS"
+  ],
+  "author": "aguleroglu",
+  "license": "ISC"
+}
