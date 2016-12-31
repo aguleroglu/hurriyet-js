@@ -9,7 +9,7 @@ var hurriyet = function(api_key){
 
     self.api_key = api_key;
 
-    function post_porcess(options,callback,response){
+    function post_process(options,callback,response){
 
         var obj = JSON.parse(response.body);
 
@@ -55,7 +55,7 @@ var hurriyet = function(api_key){
         
         q.skip(o.skip).top(o.top).get().then(function(res){
 
-            post_porcess(o,c,res);
+            post_process(o,c,res);
             
         });
 
@@ -87,7 +87,7 @@ var hurriyet = function(api_key){
 
         q.get().then(function(res){
             
-            post_porcess(o,c,res);
+            post_process(o,c,res);
 
         });
     }
@@ -151,7 +151,7 @@ var hurriyet = function(api_key){
 
         q.skip(o.skip).top(o.top).get().then(function(res){
             
-            post_porcess(o,c,res);
+            post_process(o,c,res);
 
         });
     }
