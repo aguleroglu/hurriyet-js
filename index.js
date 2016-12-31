@@ -80,14 +80,6 @@ var hurriyet = function(api_key){
         }
 
         var q = generate_odata(resource,id);
-
-        if(o.skip!=undefined || o.skip!=null){
-            q.skip(o.skip);
-        }
-
-        if(o.top!=undefined || o.top!=null){
-            q.top(o.top);
-        }
         
         for(i in o.columns){
             q.select(o.columns[i]);
@@ -133,15 +125,15 @@ var hurriyet = function(api_key){
             };
 
         if(o!=undefined && c!=undefined){
-
-            if(o.skip!=undefined || o.skip!=null){
-                    q.skip(o.skip);
+            if(o.skip==null || o.skip==undefined){
+                o.skip = defaults.skip;
             }
 
-            if(o.top!=undefined || o.top!=null){
-                q.top(o.top);
+            if(o.top==null || o.top==undefined){
+                o.top = defaults.top;
             }
-            if(o.columns==null || o.columns==undefined){
+
+             if(o.columns==null || o.columns==undefined){
                 o.columns = defaults.columns;
             }
         }
