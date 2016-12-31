@@ -1,6 +1,6 @@
 {
   "name": "hurriyet-js",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Hurriyet Public API NodeJs Wrapper",
   "main": "index.js",
   "scripts": {

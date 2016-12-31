@@ -100,4 +100,6 @@
 
         });
 
+For Api Key and Api Documents : https://developers.hurriyet.com.tr/
+
 Developed by aguleroglu
